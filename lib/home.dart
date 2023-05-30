@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        //backgroundColor: Color(0xff3e977a),
+        backgroundColor: Color(0xff3e977a),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(

@@ -15,7 +15,7 @@ class BotaoIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {
-        Navigator.push(context, PageTransition(child: const TelaLogin(), type: PageTransitionType.leftToRight));
+        Navigator.push(context, PageTransition(child: const TelaLogin(), type: PageTransitionType.bottomToTop));
       },
       icon: SvgPicture.asset(
         icon,

@@ -7,11 +7,11 @@ class TelaInicial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: GNav(tabs: const [
-        GButton(icon: Icons.home),
-        GButton(icon: Icons.check),
-        GButton(icon: Icons.settings),
-        GButton(icon: Icons.settings)
+      bottomNavigationBar: GNav(backgroundColor: Color(0xff3e977a), gap: 8, tabs: const [
+        GButton(icon: Icons.home, text: 'Home'),
+        GButton(icon: Icons.fact_check, text: 'Objetivos'),
+        GButton(icon: Icons.settings, text: 'Configurações'),
+        GButton(icon: Icons.person, text: 'Perfil'),
       ]),
     );
   }

@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/tela_inicial.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import '../registro.dart';
 
-class BotaoIconRegister extends StatelessWidget {
+class BotaoTelaInicial extends StatelessWidget {
   final String icon;
   final String label;
   final double horizontal;
 
-  const BotaoIconRegister({Key? key, required this.icon, required this.label, this.horizontal = 100}) : super(key: key);
+  const BotaoTelaInicial({Key? key, required this.icon, required this.label, this.horizontal = 100}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {
-        Navigator.push(context, PageTransition(child: const Registro(), type: PageTransitionType.bottomToTop));
+        Navigator.push(context, PageTransition(child: const TelaInicial(), type: PageTransitionType.bottomToTop));
       },
       icon: SvgPicture.asset(
         icon,
