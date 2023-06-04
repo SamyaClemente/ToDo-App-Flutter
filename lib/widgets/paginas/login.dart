@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application_1/widgets/tela_inicial.dart';
+import 'package:flutter_application_1/widgets/paginas/tela_inicial.dart';
 import 'package:page_transition/page_transition.dart';
 
 class TelaLogin extends StatelessWidget {

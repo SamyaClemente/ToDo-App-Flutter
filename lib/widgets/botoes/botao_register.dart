@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
-import '../registro.dart';
+import 'package:flutter_application_1/widgets/paginas/registro.dart';
 
 class BotaoIconRegister extends StatelessWidget {
   final String icon;

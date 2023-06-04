@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/registro.dart';
-import 'package:flutter_application_1/widgets/botao_icon.dart';
-import 'package:flutter_application_1/widgets/botao_register.dart';
+import 'package:flutter_application_1/widgets/paginas/registro.dart';
+import 'package:flutter_application_1/widgets/botoes/botao_icon.dart';
+import 'package:flutter_application_1/widgets/botoes/botao_register.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Home extends StatelessWidget {

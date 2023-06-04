@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/widgets/tela_inicial.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
-import '../registro.dart';
+import 'package:flutter_application_1/widgets/paginas/login.dart';
 
-class BotaoTelaInicial extends StatelessWidget {
+class BotaoIcon extends StatelessWidget {
   final String icon;
   final String label;
   final double horizontal;
 
-  const BotaoTelaInicial({Key? key, required this.icon, required this.label, this.horizontal = 100}) : super(key: key);
+  const BotaoIcon({Key? key, required this.icon, required this.label, this.horizontal = 100}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {
-        Navigator.push(context, PageTransition(child: const TelaInicial(), type: PageTransitionType.bottomToTop));
+        Navigator.push(context, PageTransition(child: const TelaLogin(), type: PageTransitionType.bottomToTop));
       },
       icon: SvgPicture.asset(
         icon,
         width: 25,
-        color: Colors.black,
+        color: Colors.white,
       ),
       label: Text(
         label,
         style: const TextStyle(
-          color: Colors.black,
+          color: Colors.white,
           fontSize: 17,
         ),
       ),
@@ -34,7 +33,7 @@ class BotaoTelaInicial extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
           ),
-          backgroundColor: Color(0xffffffff)),
+          backgroundColor: Color(0xff3e977a)),
     );
   }
 }
