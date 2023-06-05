@@ -29,6 +29,7 @@ class TelaAddCardState extends State<TelaAddCard> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Escreva um Objetivo'),
+        backgroundColor: Color(0xFF238369),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

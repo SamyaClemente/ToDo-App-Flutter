@@ -11,7 +11,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xff3e977a),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -27,7 +26,7 @@ class Home extends StatelessWidget {
           width: 500,
           child: Column(
             children: <Widget>[
-              SizedBox(height: 300),
+              SizedBox(height: 250),
               const Text(
                 'Login',
                 style: TextStyle(
@@ -43,7 +42,7 @@ class Home extends StatelessWidget {
                 horizontal: 60,
               ),
               const SizedBox(
-                height: 10,
+                height: 13,
               ),
               const BotaoIconRegister(
                 icon: 'assets/svg/email-icon.svg',

@@ -19,12 +19,11 @@ class BotaoIconRegister extends StatelessWidget {
       icon: SvgPicture.asset(
         icon,
         width: 25,
-        color: Colors.black,
       ),
       label: Text(
         label,
         style: const TextStyle(
-          color: Colors.black,
+          color: Colors.black87,
           fontSize: 17,
         ),
       ),

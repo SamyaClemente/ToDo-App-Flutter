@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/widgets/paginas/TelaAddCard.dart';
 import 'package:flutter_application_1/widgets/paginas/login.dart';
-import 'package:flutter_application_1/widgets/paginas/calendarioObjetivos.dart';
+import 'package:flutter_application_1/widgets/paginas/TelacalendarioObjetivos.dart';
 
 import 'Teste.dart';
 
