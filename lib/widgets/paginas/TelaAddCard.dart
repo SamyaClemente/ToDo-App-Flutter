@@ -45,6 +45,10 @@ class TelaAddCardState extends State<TelaAddCard> {
                       controller: titleController,
                       style: const TextStyle(fontSize: 24, color: Colors.black87),
                       decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                          Radius.circular(33),
+                        )),
                         labelText: 'Título',
                         labelStyle: TextStyle(fontSize: 20),
                       ),
@@ -56,10 +60,16 @@ class TelaAddCardState extends State<TelaAddCard> {
                         return null;
                       },
                     ),
+                    SizedBox(height: 15),
                     TextFormField(
                       controller: descriptionController,
                       style: const TextStyle(fontSize: 24, color: Colors.black87),
                       decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(33),
+                          ),
+                        ),
                         labelText: 'Descrição',
                         labelStyle: TextStyle(fontSize: 20),
                       ),
@@ -73,7 +83,11 @@ class TelaAddCardState extends State<TelaAddCard> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 20),
+                      height: 30,
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff1e6951),
+                        ),
                         child: const Text(
                           'Selecionar Data',
                           style: TextStyle(fontSize: 20),
@@ -96,6 +110,9 @@ class TelaAddCardState extends State<TelaAddCard> {
                     Container(
                       margin: const EdgeInsets.only(top: 20),
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff1ea181),
+                        ),
                         child: const Text(
                           'Adicionar',
                           style: TextStyle(fontSize: 20),
