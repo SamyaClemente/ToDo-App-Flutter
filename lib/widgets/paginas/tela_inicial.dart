@@ -19,7 +19,7 @@ class _TelaInicialState extends State<TelaInicial> {
     CalendarPage(), //1 page
     TelaAddCard(), //2 page
     TestePage(), //3 page
-    const TelaLogin() //4 page
+    TelaLogin() //4 page
   ];
 
   @override

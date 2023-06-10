@@ -3,9 +3,11 @@ import 'package:flutter_application_1/widgets/paginas/home.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/widgets/botoes/task_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:flutter_application_1/services/widget_tree.dart';
+import 'package:flutter_application_1/services/firebase_options.dart';
+import 'package:flutter_application_1/services/auth_service.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Movido para cá
 
   await Firebase.initializeApp(
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         // Adicione quaisquer outros provedores que você precise
       ],
       child: const MaterialApp(
-        home: Home(),
+        home: const WidgetTree(),
       ),
     );
   }

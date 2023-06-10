@@ -69,6 +69,7 @@ dependencies:
   provider: ^6.0.5
   flutterfire_cli: ^0.2.7
   firebase_core: ^2.13.1
+  firebase_auth: ^4.6.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
