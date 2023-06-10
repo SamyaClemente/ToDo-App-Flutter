@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/botoes/task_provider.dart';
 import 'package:intl/intl.dart';
-
-class Task {
-  String title;
-  String description;
-  DateTime selectedDate;
-
-  Task({required this.title, required this.description, required this.selectedDate});
-}
+import 'package:provider/provider.dart';
 
 class TelaAddCard extends StatefulWidget {
   @override
@@ -21,11 +15,12 @@ class TelaAddCardState extends State<TelaAddCard> {
   final TextEditingController descriptionController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  List<Task> _tasks = [];
   DateTime? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
+    final taskProvider = Provider.of<TaskProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Escreva um Objetivo'),
@@ -120,7 +115,7 @@ class TelaAddCardState extends State<TelaAddCard> {
                         onPressed: () {
                           if (_formKey.currentState!.validate() && _selectedDate != null) {
                             setState(() {
-                              _tasks.add(
+                              taskProvider.addTask(
                                 Task(
                                   title: titleController.text,
                                   description: descriptionController.text,
@@ -140,51 +135,55 @@ class TelaAddCardState extends State<TelaAddCard> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: _tasks.length,
-                itemBuilder: (context, index) {
-                  final task = _tasks[index];
-                  final formattedDate = DateFormat('dd/MM/yyyy').format(task.selectedDate);
-                  return Card(
-                    color: const Color(0xff3e977a),
-                    child: ListTile(
-                      title: Text(
-                        task.title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white,
+              child: Consumer<TaskProvider>(
+                builder: (context, taskProvider, _) {
+                  final tasks = taskProvider.tasks;
+                  return ListView.builder(
+                    itemCount: tasks.length,
+                    itemBuilder: (context, index) {
+                      final task = tasks[index];
+                      return Card(
+                        color: const Color(0xff3e977a),
+                        child: ListTile(
+                          title: Text(
+                            task.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                task.description,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                'Data: ${DateFormat('dd/MM/yyyy').format(task.selectedDate)}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              setState(() {
+                                taskProvider.removeTask(index);
+                              });
+                            },
+                          ),
                         ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            task.description,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            'Data: $formattedDate',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {
-                          setState(() {
-                            _tasks.removeAt(index);
-                          });
-                        },
-                      ),
-                    ),
+                      );
+                    },
                   );
                 },
               ),

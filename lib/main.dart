@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_application_1/widgets/paginas/home.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_1/widgets/botoes/task_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Movido para cá
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        //  scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 204),
-
-        // scaffoldBackgroundColor: LinearGradient(colors: ()).
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<TaskProvider>(create: (context) => TaskProvider()),
+        // Adicione quaisquer outros provedores que você precise
+      ],
+      child: const MaterialApp(
+        home: Home(),
       ),
-      //home: const TelaLogin(),
-      // home: const Registro(),
-      home: const Home(),
     );
   }
 }
