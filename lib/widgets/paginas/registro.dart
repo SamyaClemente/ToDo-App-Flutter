@@ -1,7 +1,115 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_1/services/auth_service.dart';
+import 'package:flutter_application_1/widgets/paginas/home.dart';
+import 'package:flutter_application_1/widgets/paginas/login.dart';
+import 'package:flutter_application_1/widgets/paginas/tela_inicial.dart';
+import 'package:page_transition/page_transition.dart';
 
-class Registro extends StatelessWidget {
-  const Registro({super.key});
+import '../botoes/botao_icon.dart';
+import '../botoes/botao_tela_inicial.dart';
+
+class Registro extends StatefulWidget {
+  Registro({Key? key}) : super(key: key);
+
+  @override
+  State<Registro> createState() => _Registro();
+}
+
+class _Registro extends State<Registro> {
+  final User? user = Auth().currentUser;
+  bool registrationSuccess = false;
+
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
+
+  Widget _title() {
+    return const Text('Firebase Auth');
+  }
+
+  Widget userUid() {
+    return Text(user?.email ?? 'User email');
+  }
+
+  Widget _signOutButton() {
+    return ElevatedButton(
+      onPressed: signOut,
+      child: const Text('Singn Out'),
+    );
+  }
+
+  String? errorMessage = '';
+  bool isLogin = true;
+
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+
+  Future<void> createUserWithEmailAndPassword() async {
+    try {
+      registrationSuccess = true;
+
+      await Auth().createUserWithEmailAndPassword(
+        email: _controllerEmail.text,
+        password: _controllerPassword.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
+
+  Widget _entryField(
+    String title,
+    TextEditingController controller,
+  ) {
+    return SizedBox(
+        width: 250,
+        child: TextField(
+          controller: controller,
+          obscureText: false,
+          decoration: InputDecoration(border: const OutlineInputBorder(), labelText: title),
+        ));
+  }
+
+  Widget _errorMessage() {
+    return Text(errorMessage == '' ? '' : 'Humm ? $errorMessage');
+  }
+
+  Widget _submitButton() {
+    return TextButton(
+      style: TextButton.styleFrom(
+        textStyle: const TextStyle(fontSize: 15),
+      ),
+      onPressed: () async {
+        await createUserWithEmailAndPassword();
+
+        if (registrationSuccess) {
+          // Exibir a mensagem de "registrado com sucesso"
+          // ignore: use_build_context_synchronously
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Registrado com sucesso'),
+              content: const Text('Seu registro foi concluído com sucesso.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Fechar o diálogo
+                    // Fazer o login automaticamente após o registro
+                    Navigator.pushAndRemoveUntil(context, PageTransition(child: TelaLogin(), type: PageTransitionType.leftToRight), ModalRoute.withName("/login"));
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+      child: const Text('Registrar'),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,79 +123,43 @@ class Registro extends StatelessWidget {
               height: 450,
               decoration: const BoxDecoration(boxShadow: [
                 BoxShadow(color: Colors.black, spreadRadius: 1, blurRadius: 20)
-              ], color: Color(0xFFE4E9E8), borderRadius: BorderRadius.all(Radius.circular(30))),
-              child: const Center(
+              ], color: Color(0xFFE4E9E8), borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30))),
+              child: Center(
                 child: Column(children: [
-                  SizedBox(height: 50),
-                  Text(
+                  const SizedBox(height: 50),
+                  const Text(
                     'Registro',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
                     ),
                   ),
-                  SizedBox(height: 15),
-                  SizedBox(
-                    width: 250,
-                    child: TextField(
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Nome',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
+                  const SizedBox(height: 15),
+                  _entryField('E-mail', _controllerEmail),
+                  const SizedBox(
                     height: 15,
                   ),
-                  SizedBox(
-                    width: 250,
-                    child: TextField(
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'E-mail',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
+                  _entryField('Password', _controllerPassword),
+                  const SizedBox(
                     height: 15,
                   ),
-                  SizedBox(
-                    width: 250,
-                    child: TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Senha',
-                      ),
+                  const Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[]),
+                  _errorMessage(),
+                  _submitButton(),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 15),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-                    SizedBox(height: 15),
-                    FilledButton.tonal(
-                      onPressed: null,
-                      child: Text('Entrar'),
-                    ),
-                    Text(
-                      'ou',
+                    onPressed: () {
+                      Navigator.push(context, PageTransition(child: const Home(), type: PageTransitionType.leftToRight));
+                    },
+                    child: const Text(
+                      'Cancelar',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        color: Color(0xFF238369),
                       ),
                     ),
-                    FilledButton.tonal(
-                      onPressed: null,
-                      child: Text('Cancelar'),
-                    ),
-                    SizedBox(height: 30),
-                  ]),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-                    SizedBox(height: 15),
-                  ]),
+                  ),
                 ]),
               ),
             );

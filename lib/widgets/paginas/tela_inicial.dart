@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/widgets/paginas/TelaAddCard.dart';
-import 'package:flutter_application_1/widgets/paginas/login.dart';
+//import 'package:flutter_application_1/widgets/paginas/login.dart';
 import 'package:flutter_application_1/widgets/paginas/TelacalendarioObjetivos.dart';
+import 'package:flutter_application_1/widgets/paginas/tela_user.dart';
 
 import 'Teste.dart';
 
@@ -19,7 +20,7 @@ class _TelaInicialState extends State<TelaInicial> {
     CalendarPage(), //1 page
     TelaAddCard(), //2 page
     TestePage(), //3 page
-    TelaLogin() //4 page
+    TelaUser(), //4 page
   ];
 
   @override

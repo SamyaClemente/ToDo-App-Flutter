@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/widgets/paginas/tela_inicial.dart';
@@ -27,13 +25,6 @@ class _TelaLogin extends State<TelaLogin> {
 
   Widget userUid() {
     return Text(user?.email ?? 'User email');
-  }
-
-  Widget _signOutButton() {
-    return ElevatedButton(
-      onPressed: signOut,
-      child: const Text('Singn Out'),
-    );
   }
 
   String? errorMessage = '';
@@ -103,7 +94,7 @@ class _TelaLogin extends State<TelaLogin> {
         body: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -141,17 +132,19 @@ class _TelaLogin extends State<TelaLogin> {
                       const SizedBox(
                         height: 15,
                       ),
-                      _entryField('email', _controllerEmail),
+                      _entryField('E-mail', _controllerEmail),
                       const SizedBox(
                         height: 15,
                       ),
-                      _entryField('password', _controllerPassword),
+                      _entryField('Password', _controllerPassword),
                       const SizedBox(
                         height: 15,
                       ),
                       const Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[]),
                       _errorMessage(),
                       _submitButton(),
+
+                      //botão recuperar senha
                       TextButton(
                         style: TextButton.styleFrom(
                           textStyle: const TextStyle(fontSize: 15),
@@ -167,7 +160,6 @@ class _TelaLogin extends State<TelaLogin> {
                     ],
                   ),
                 );
-                // );
               }),
             ),
           ],

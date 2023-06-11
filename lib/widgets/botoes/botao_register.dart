@@ -14,7 +14,7 @@ class BotaoIconRegister extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {
-        Navigator.push(context, PageTransition(child: const Registro(), type: PageTransitionType.bottomToTop));
+        Navigator.push(context, PageTransition(child: Registro(), type: PageTransitionType.bottomToTop));
       },
       icon: SvgPicture.asset(
         icon,

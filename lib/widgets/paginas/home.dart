@@ -57,7 +57,7 @@ class Home extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 15),
                 ),
                 onPressed: () {
-                  Navigator.push(context, PageTransition(child: const Registro(), type: PageTransitionType.leftToRight));
+                  Navigator.push(context, PageTransition(child: Registro(), type: PageTransitionType.leftToRight));
                 },
                 child: const Text(
                   'Não tem uma conta? Inscrever-se',
