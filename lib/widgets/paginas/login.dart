@@ -9,10 +9,10 @@ class TelaLogin extends StatefulWidget {
   TelaLogin({Key? key}) : super(key: key);
 
   @override
-  State<TelaLogin> createState() => _TelaLogin();
+  State<TelaLogin> createState() => _TelaLoginState();
 }
 
-class _TelaLogin extends State<TelaLogin> {
+class _TelaLoginState extends State<TelaLogin> {
   final User? user = Auth().currentUser;
 
   Future<void> signOut() async {
@@ -29,11 +29,16 @@ class _TelaLogin extends State<TelaLogin> {
 
   String? errorMessage = '';
   bool isLogin = true;
+  bool isLoading = false; // Variável de estado para controlar o indicador de carregamento
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
   Future<void> signInWithEmailandPassword() async {
+    setState(() {
+      isLoading = true; // Ativa o indicador de carregamento
+    });
+
     try {
       await Auth().signInWithEmailAndPassword(
         email: _controllerEmail.text,
@@ -44,9 +49,17 @@ class _TelaLogin extends State<TelaLogin> {
         errorMessage = e.message;
       });
     }
+
+    setState(() {
+      isLoading = false; // Desativa o indicador de carregamento após a conclusão da operação
+    });
   }
 
   Future<void> createUserWithEmailAndPassword() async {
+    setState(() {
+      isLoading = true; // Ativa o indicador de carregamento
+    });
+
     try {
       await Auth().createUserWithEmailAndPassword(
         email: _controllerEmail.text,
@@ -57,6 +70,10 @@ class _TelaLogin extends State<TelaLogin> {
         errorMessage = e.message;
       });
     }
+
+    setState(() {
+      isLoading = false; // Desativa o indicador de carregamento após a conclusão da operação
+    });
   }
 
   Widget _entryField(
@@ -81,8 +98,10 @@ class _TelaLogin extends State<TelaLogin> {
       style: TextButton.styleFrom(
         textStyle: const TextStyle(fontSize: 15),
       ),
-      onPressed: signInWithEmailandPassword,
-      child: const Text('Entrar'),
+      onPressed: isLoading ? null : signInWithEmailandPassword, // Desabilita o botão durante o carregamento
+      child: isLoading
+          ? CircularProgressIndicator() // Exibe o indicador de carregamento quando isLoading é verdadeiro
+          : const Text('Entrar'),
     );
   }
 
@@ -90,7 +109,7 @@ class _TelaLogin extends State<TelaLogin> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.transparent, // Defina a cor de fundo do Scaffold como transparente
+        backgroundColor: Colors.transparent,
         body: Stack(
           children: [
             Container(
@@ -102,7 +121,7 @@ class _TelaLogin extends State<TelaLogin> {
                     Color(0xff1ea181),
                     Color(0xff1e6951),
                     Color(0xff183e2c),
-                  ], // Cores do gradiente
+                  ],
                 ),
               ),
             ),
@@ -143,8 +162,6 @@ class _TelaLogin extends State<TelaLogin> {
                       const Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[]),
                       _errorMessage(),
                       _submitButton(),
-
-                      //botão recuperar senha
                       TextButton(
                         style: TextButton.styleFrom(
                           textStyle: const TextStyle(fontSize: 15),

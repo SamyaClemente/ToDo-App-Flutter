@@ -19,6 +19,7 @@ class Registro extends StatefulWidget {
 class _Registro extends State<Registro> {
   final User? user = Auth().currentUser;
   bool registrationSuccess = false;
+  bool isLoading = false; // Variável de estado para controlar o indicador de carregamento
 
   Future<void> signOut() async {
     await Auth().signOut();
@@ -35,7 +36,7 @@ class _Registro extends State<Registro> {
   Widget _signOutButton() {
     return ElevatedButton(
       onPressed: signOut,
-      child: const Text('Singn Out'),
+      child: const Text('Sign Out'),
     );
   }
 
@@ -46,6 +47,10 @@ class _Registro extends State<Registro> {
   final TextEditingController _controllerPassword = TextEditingController();
 
   Future<void> createUserWithEmailAndPassword() async {
+    setState(() {
+      isLoading = true; // Ativa o indicador de carregamento
+    });
+
     try {
       registrationSuccess = true;
 
@@ -58,6 +63,10 @@ class _Registro extends State<Registro> {
         errorMessage = e.message;
       });
     }
+
+    setState(() {
+      isLoading = false; // Desativa o indicador de carregamento após a conclusão da operação
+    });
   }
 
   Widget _entryField(
@@ -65,12 +74,13 @@ class _Registro extends State<Registro> {
     TextEditingController controller,
   ) {
     return SizedBox(
-        width: 250,
-        child: TextField(
-          controller: controller,
-          obscureText: false,
-          decoration: InputDecoration(border: const OutlineInputBorder(), labelText: title),
-        ));
+      width: 250,
+      child: TextField(
+        controller: controller,
+        obscureText: false,
+        decoration: InputDecoration(border: const OutlineInputBorder(), labelText: title),
+      ),
+    );
   }
 
   Widget _errorMessage() {
@@ -82,32 +92,36 @@ class _Registro extends State<Registro> {
       style: TextButton.styleFrom(
         textStyle: const TextStyle(fontSize: 15),
       ),
-      onPressed: () async {
-        await createUserWithEmailAndPassword();
+      onPressed: isLoading
+          ? null
+          : () async {
+              await createUserWithEmailAndPassword();
 
-        if (registrationSuccess) {
-          // Exibir a mensagem de "registrado com sucesso"
-          // ignore: use_build_context_synchronously
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Registrado com sucesso'),
-              content: const Text('Seu registro foi concluído com sucesso.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Fechar o diálogo
-                    // Fazer o login automaticamente após o registro
-                    Navigator.pushAndRemoveUntil(context, PageTransition(child: TelaLogin(), type: PageTransitionType.leftToRight), ModalRoute.withName("/login"));
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            ),
-          );
-        }
-      },
-      child: const Text('Registrar'),
+              if (registrationSuccess) {
+                // Exibir a mensagem de "registrado com sucesso"
+                // ignore: use_build_context_synchronously
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Registrado com sucesso'),
+                    content: const Text('Seu registro foi concluído com sucesso.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context); // Fechar o diálogo
+                          // Fazer o login automaticamente após o registro
+                          Navigator.pushAndRemoveUntil(context, PageTransition(child: TelaLogin(), type: PageTransitionType.leftToRight), ModalRoute.withName("/login"));
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+      child: isLoading
+          ? CircularProgressIndicator() // Exibe o indicador de carregamento durante o registro
+          : const Text('Registrar'),
     );
   }
 

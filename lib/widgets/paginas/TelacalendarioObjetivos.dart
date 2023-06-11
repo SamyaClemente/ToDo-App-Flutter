@@ -14,13 +14,16 @@ class _CalendarPageState extends State<CalendarPage> {
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
 
+  List<Task> getTasksForSelectedDay(List<Task> tasks) {
+    return tasks.where((task) => isSameDay(task.selectedDate, _selectedDay)).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<TaskProvider>(
         builder: (context, taskProvider, _) {
-          final tasks = taskProvider.tasks;
-          // Faça algo com a lista de tarefas
+          final tasks = getTasksForSelectedDay(taskProvider.tasks);
 
           return Column(
             children: [
@@ -46,7 +49,6 @@ class _CalendarPageState extends State<CalendarPage> {
                   selectedDecoration: BoxDecoration(
                     color: Colors.green,
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(5.0),
                   ),
                 ),
                 onFormatChanged: (format) {

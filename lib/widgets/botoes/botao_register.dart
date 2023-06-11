@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter_application_1/widgets/paginas/registro.dart';
+
+import '../paginas/login.dart';
 
 class BotaoIconRegister extends StatelessWidget {
   final String icon;
@@ -14,7 +15,7 @@ class BotaoIconRegister extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {
-        Navigator.push(context, PageTransition(child: Registro(), type: PageTransitionType.bottomToTop));
+        Navigator.push(context, PageTransition(child: TelaLogin(), type: PageTransitionType.bottomToTop));
       },
       icon: SvgPicture.asset(
         icon,

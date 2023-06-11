@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/widgets/paginas/TelaAddCard.dart';
+import 'package:flutter_application_1/widgets/paginas/Tela_config.dart';
 //import 'package:flutter_application_1/widgets/paginas/login.dart';
 import 'package:flutter_application_1/widgets/paginas/TelacalendarioObjetivos.dart';
 import 'package:flutter_application_1/widgets/paginas/tela_user.dart';
-
-import 'Teste.dart';
 
 class TelaInicial extends StatefulWidget {
   const TelaInicial({Key? key});
@@ -19,7 +18,7 @@ class _TelaInicialState extends State<TelaInicial> {
   final List<Widget> _pages = [
     CalendarPage(), //1 page
     TelaAddCard(), //2 page
-    TestePage(), //3 page
+    TelaConfig(), //3 page
     TelaUser(), //4 page
   ];
 
