@@ -18,7 +18,7 @@ class _TelaInicialState extends State<TelaInicial> {
   final List<Widget> _pages = [
     CalendarPage(), //1 page
     TelaAddCard(), //2 page
-    TelaConfig(), //3 page
+    // TelaConfig(), //3 page
     TelaUser(), //4 page
   ];
 
@@ -54,11 +54,11 @@ class _TelaInicialState extends State<TelaInicial> {
                   label: 'Objetivos',
                   backgroundColor: Color(0xff3e977a),
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: 'Configurações',
-                  backgroundColor: Color(0xff3e977a),
-                ),
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.settings),
+                //   label: 'Configurações',
+                //   backgroundColor: Color(0xff3e977a),
+                // ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person),
                   label: 'Perfil',
