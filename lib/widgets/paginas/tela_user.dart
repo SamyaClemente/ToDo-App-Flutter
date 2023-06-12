@@ -28,23 +28,19 @@ class _TelaUserState extends State<TelaUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF3E977A),
       appBar: AppBar(
-        title: Text('Perfil do Usuário'),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              try {
-                await FirebaseAuth.instance.signOut();
-                // Navegar para a tela de login ou tela inicial, por exemplo
-                Navigator.push(context, MaterialPageRoute(builder: (context) => TelaLogin()));
-              } catch (e) {
-                // Lidar com erros, se necessário
-                print('Erro ao fazer logout: $e');
-              }
-            },
-            icon: const Icon(Icons.logout),
-          ),
-        ],
+        toolbarHeight: 60,
+        title: const Text('Perfil do Usuário'),
+        titleTextStyle: const TextStyle(
+          color: Color(0xff1e6951),
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+        backgroundColor: Color.fromARGB(255, 241, 253, 245),
+        // actions: [
+
+        // ],
       ),
       body: Center(
         child: Column(
@@ -56,30 +52,87 @@ class _TelaUserState extends State<TelaUser> {
                 alignment: Alignment.bottomRight,
                 children: [
                   CircleAvatar(
-                    radius: 50,
+                    radius: 80,
                     backgroundImage: _imageURL != null
                         ? FileImage(File(_imageURL!))
                         : FirebaseAuth.instance.currentUser?.photoURL != null
                             ? NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!)
                             : Image.asset('assets/default_profile_image.png').image,
+                    backgroundColor: Color.fromARGB(255, 241, 253, 245),
                   ),
                   FloatingActionButton(
                     onPressed: _pickImage,
                     child: const Icon(Icons.edit),
+                    backgroundColor: Color(0xff1e6951),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
             Text(
-              'Bem-vindo${FirebaseAuth.instance.currentUser?.displayName ?? ''}!',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              'Bem-vindo ${FirebaseAuth.instance.currentUser?.displayName ?? ''}!',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 241, 253, 245)),
             ),
             const SizedBox(height: 8),
             Text(
               'Email: ${FirebaseAuth.instance.currentUser?.email ?? ''}',
-              style: const TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 241, 253, 245)),
             ),
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff1e6951),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  shadowColor: Colors.black,
+                  elevation: 9,
+                ),
+                child: const Text(
+                  'LogOut',
+                  style: TextStyle(fontSize: 20),
+                ),
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TelaLogin()));
+                  } catch (e) {
+                    print('Erro ao fazer logout: $e');
+                  }
+                },
+              ),
+            ),
+            // TextButton(
+            //   style: TextButton.styleFrom(
+            //     textStyle: const TextStyle(fontSize: 15),
+            //   ),
+            //   onPressed: () async {
+            //     try {
+            //       await FirebaseAuth.instance.signOut();
+            //       Navigator.push(context, MaterialPageRoute(builder: (context) => TelaLogin()));
+            //     } catch (e) {
+            //       print('Erro ao fazer logout: $e');
+            //     }
+            //   },
+            //   child: const Text(
+            //     'LogOut',
+            //     style: TextStyle(
+            //       color: Color(0xff1e6951),
+            //     ),
+            //   ),
+            // ),
+            // IconButton(
+            //   onPressed: () async {
+            //     try {
+            //       await FirebaseAuth.instance.signOut();
+            //       Navigator.push(context, MaterialPageRoute(builder: (context) => TelaLogin()));
+            //     } catch (e) {
+            //       print('Erro ao fazer logout: $e');
+            //     }
+            //   },
+            //   icon: const Icon(Icons.logout),
+            //   color: const Color(0xff1e6951),
+            // ),
           ],
         ),
       ),

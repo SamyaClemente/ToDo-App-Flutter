@@ -26,16 +26,22 @@ class Home extends StatelessWidget {
           width: 500,
           child: Column(
             children: <Widget>[
-              SizedBox(height: 250),
-              const Text(
-                'Login',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32,
-                  color: Colors.white,
-                  height: 7,
-                ),
+              SizedBox(height: 280),
+              Image.asset(
+                'assets/svg/habituar.png',
+                width: 150,
+                height: 150,
               ),
+              SizedBox(height: 40),
+              // const Text(
+              //   'Login',
+              //   style: TextStyle(
+              //     fontWeight: FontWeight.bold,
+              //     fontSize: 32,
+              //     color: Colors.white,
+              //     height: 7,
+              //   ),
+              // ),
               const BotaoIcon(
                 icon: 'assets/svg/g_logo.svg',
                 label: 'Entrar com o Google',

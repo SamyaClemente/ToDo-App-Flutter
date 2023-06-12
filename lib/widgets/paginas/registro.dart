@@ -45,6 +45,7 @@ class _Registro extends State<Registro> {
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerConfirmPassword = TextEditingController();
 
   Future<void> createUserWithEmailAndPassword() async {
     setState(() {
@@ -52,6 +53,13 @@ class _Registro extends State<Registro> {
     });
 
     try {
+      if (_controllerPassword.text != _controllerConfirmPassword.text) {
+        setState(() {
+          errorMessage = 'As senhas não coincidem.';
+        });
+        return;
+      }
+
       registrationSuccess = true;
 
       await Auth().createUserWithEmailAndPassword(
@@ -77,8 +85,11 @@ class _Registro extends State<Registro> {
       width: 250,
       child: TextField(
         controller: controller,
-        obscureText: false,
-        decoration: InputDecoration(border: const OutlineInputBorder(), labelText: title),
+        obscureText: title.contains('Password'),
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: title,
+        ),
       ),
     );
   }
@@ -154,6 +165,10 @@ class _Registro extends State<Registro> {
                     height: 15,
                   ),
                   _entryField('Password', _controllerPassword),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  _entryField('Confirm Password', _controllerConfirmPassword),
                   const SizedBox(
                     height: 15,
                   ),

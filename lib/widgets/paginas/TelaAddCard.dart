@@ -22,14 +22,23 @@ class TelaAddCardState extends State<TelaAddCard> {
     final taskProvider = Provider.of<TaskProvider>(context, listen: false);
 
     return Scaffold(
+      backgroundColor: const Color(0xFF3E977A),
       appBar: AppBar(
-        title: const Text('Escreva um Objetivo'),
-        backgroundColor: Color(0xFF238369),
-      ),
+          toolbarHeight: 60,
+          title: const Text('Adicione um novo objetivo'),
+          titleTextStyle: const TextStyle(
+            color: Color(0xff1e6951),
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+          backgroundColor: Color.fromARGB(255, 241, 253, 245)),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: <Widget>[
+            const SizedBox(
+              height: 30,
+            ),
             Container(
               margin: const EdgeInsets.only(bottom: 20),
               child: Form(
@@ -38,14 +47,35 @@ class TelaAddCardState extends State<TelaAddCard> {
                   children: <Widget>[
                     TextFormField(
                       controller: titleController,
-                      style: const TextStyle(fontSize: 24, color: Colors.black87),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff1e6951),
+                      ),
+                      cursorColor: Color(0xff1e6951),
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 156, 219, 199),
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                          Radius.circular(33),
-                        )),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(33),
+                          ),
+                          borderSide: BorderSide(width: 2.0, color: Color.fromARGB(255, 156, 219, 199)),
+                        ),
                         labelText: 'Título',
-                        labelStyle: TextStyle(fontSize: 20),
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xff1e6951),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(33),
+                          ), // Define o raio das bordas ao selecionar
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 156, 219, 199), // Define a cor da borda ao selecionar
+                            width: 2.0, // Define a espessura da borda ao selecionar
+                          ),
+                        ),
                       ),
                       keyboardType: TextInputType.text,
                       validator: (value) {
@@ -55,18 +85,37 @@ class TelaAddCardState extends State<TelaAddCard> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     TextFormField(
                       controller: descriptionController,
-                      style: const TextStyle(fontSize: 24, color: Colors.black87),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff1e6951),
+                      ),
+                      cursorColor: Color(0xff1e6951),
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 156, 219, 199),
                         enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(33),
+                            ),
+                            borderSide: BorderSide(width: 2.0, color: Color.fromARGB(255, 156, 219, 199))),
+                        labelText: 'Descrição',
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xff1e6951),
+                        ),
+                        focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(33),
                           ),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 156, 219, 199),
+                            width: 2.0,
+                          ),
                         ),
-                        labelText: 'Descrição',
-                        labelStyle: TextStyle(fontSize: 20),
                       ),
                       keyboardType: TextInputType.text,
                       validator: (value) {
@@ -78,10 +127,13 @@ class TelaAddCardState extends State<TelaAddCard> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 20),
-                      height: 30,
+                      height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff1e6951),
+                          backgroundColor: const Color(0xff1e6951),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                          shadowColor: Colors.black,
+                          elevation: 9,
                         ),
                         child: const Text(
                           'Selecionar Data',
@@ -104,9 +156,13 @@ class TelaAddCardState extends State<TelaAddCard> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 20),
+                      height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff1ea181),
+                          backgroundColor: const Color(0xff1ea181),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                          shadowColor: Colors.black,
+                          elevation: 9,
                         ),
                         child: const Text(
                           'Adicionar',
@@ -143,7 +199,10 @@ class TelaAddCardState extends State<TelaAddCard> {
                     itemBuilder: (context, index) {
                       final task = tasks[index];
                       return Card(
-                        color: const Color(0xff3e977a),
+                        color: const Color(0xff1e6951),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        shadowColor: Colors.black,
+                        elevation: 9,
                         child: ListTile(
                           title: Text(
                             task.title,

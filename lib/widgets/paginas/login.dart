@@ -84,7 +84,7 @@ class _TelaLoginState extends State<TelaLogin> {
         width: 250,
         child: TextField(
           controller: controller,
-          obscureText: false,
+          obscureText: title == 'Password',
           decoration: InputDecoration(border: OutlineInputBorder(), labelText: title),
         ));
   }
@@ -100,7 +100,7 @@ class _TelaLoginState extends State<TelaLogin> {
       ),
       onPressed: isLoading ? null : signInWithEmailandPassword, // Desabilita o botão durante o carregamento
       child: isLoading
-          ? CircularProgressIndicator() // Exibe o indicador de carregamento quando isLoading é verdadeiro
+          ? const CircularProgressIndicator() // Exibe o indicador de carregamento quando isLoading é verdadeiro
           : const Text('Entrar'),
     );
   }
