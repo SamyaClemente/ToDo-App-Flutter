@@ -1,16 +1,10 @@
-# flutter_application_1
+# Residência em Flutter
 
-A new Flutter project.
+Nesse projeto foi utilizado o framework Flutter para desenvolver um aplicativo estilo ToDo, para a residência orientada pela Accenture, através da Universidade Católica de Pernambuco.
 
-## Getting Started
+## Linguagens e Softwares
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Dart
+- Flutter
+- Visual Studio
+- Android Studio
